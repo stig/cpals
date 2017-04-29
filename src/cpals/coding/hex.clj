@@ -4,7 +4,7 @@
   "Encode a sequence of bytes to a hex string"
   [bytes]
   (->> bytes
-       (map #(format "%02X" %))
+       (map #(format "%02x" %))
        (apply str)))
 
 (def ^:private alphabet "0123456789abcdef")
