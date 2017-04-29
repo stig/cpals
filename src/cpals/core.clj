@@ -59,15 +59,25 @@
        (map byte-freqs)
        (reduce (fnil + 0 0))))
 
-(defn decode-single-byte-xor-cipher
+(defn decode-single-char-xor-cipher
+  "Decode a singe-char xor cipher text"
   [bytes]
   (let [bytevals (range Byte/MIN_VALUE Byte/MAX_VALUE)
         scores (map #(score-bytes (xor-bytes-c bytes %)) bytevals)
-        key-guess (->> (zipmap bytevals scores)
-                       (sort-by second)
-                       last
-                       first)]
-    {:key (char key-guess)
-     :text (->> (xor-bytes-c bytes key-guess)
+        guess (->> (zipmap bytevals scores)
+                   (sort-by second)
+                   last)]
+    {:key (char (first guess))
+     :score (second guess)
+     :text (->> (xor-bytes-c bytes (first guess))
+                (map #(bit-and 0xff %))
                 (map char)
                 (apply str))}))
+
+(defn detect-single-char-xor-cipher
+  "Given list of cipher texts, detect the one most likely to be encoded by single-char xor cipher"
+  [byte-arrays]
+  (->> byte-arrays
+       (map decode-single-char-xor-cipher)
+       (sort-by :score)
+       last))

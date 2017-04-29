@@ -3,7 +3,8 @@
             [cpals.coding
              [b64 :as b64]
              [hex :as hex]]
-            [cpals.core :refer [xor-bytes decode-single-byte-xor-cipher]]))
+            [cpals.core :refer :all]
+            [clojure.java.io :as io]))
 
 (t/deftest challenge1
   "http://cryptopals.com/sets/1/challenges/1"
@@ -24,7 +25,24 @@
   "http://cryptopals.com/sets/1/challenges/3"
   (t/testing "decode text scrambled with single-byte xor"
     (t/is
-     (= (decode-single-byte-xor-cipher
+     (= (decode-single-char-xor-cipher
          (hex/decode
           "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"))
-        {:key \X, :text "Cooking MC's like a pound of bacon"}))))
+        {:key \X
+         :score 228.07300000000004
+         :text "Cooking MC's like a pound of bacon"}))))
+
+(defn- read-lines
+  [filename]
+  (with-open [rdr (io/reader (io/resource filename))]
+    (doall (line-seq rdr))))
+
+(t/deftest challenge4
+  "http://cryptopals.com/sets/1/challenges/4"
+  (t/testing "detecting single-char xor cipher text"
+    (t/is (= {:score  215.22299999999998
+              :key \5
+              :text "Now that the party is jumping\n"}
+             (->> (read-lines "4.txt")
+                  (map hex/decode)
+                  detect-single-char-xor-cipher)))))
