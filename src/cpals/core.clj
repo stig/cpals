@@ -5,6 +5,13 @@
   [xs ys]
   (map bit-xor xs ys))
 
+(defn xor-buffer-with-key
+  "XOR a buffer with a repeating key"
+  [buffer key]
+  (xor-buffers buffer
+               (take (count buffer)
+                     (cycle (map byte key)))))
+
 (defn xor-buffer-with-byte
   "XOR `bytes` against `c`"
   [bytes c]
