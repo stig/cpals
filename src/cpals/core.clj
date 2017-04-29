@@ -1,6 +1,7 @@
 (ns cpals.core)
 
-(defn foo
-  "I don't do a whole lot."
-  [x]
-  (println x "Hello, World!"))
+(defn xor-bytes
+  "Given two equal-length buffers, return the result of xor-ing them"
+  [xs ys]
+  (byte-array
+   (map bit-xor xs ys)))
