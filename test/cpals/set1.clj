@@ -3,7 +3,7 @@
             [cpals.coding
              [b64 :as b64]
              [hex :as hex]]
-            [cpals.core :refer [xor-bytes]]))
+            [cpals.core :refer [xor-bytes decode-single-byte-xor-cipher]]))
 
 (t/deftest challenge1
   "http://cryptopals.com/sets/1/challenges/1"
@@ -19,3 +19,12 @@
           b (hex/decode "686974207468652062756c6c277320657965")
           expected "746865206b696420646f6e277420706c6179"]
       (t/is (= expected (hex/encode (xor-bytes a b)))))))
+
+(t/deftest challenge3
+  "http://cryptopals.com/sets/1/challenges/3"
+  (t/testing "decode text scrambled with single-byte xor"
+    (t/is
+     (= (decode-single-byte-xor-cipher
+         (hex/decode
+          "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"))
+        {:key \X, :text "Cooking MC's like a pound of bacon"}))))
