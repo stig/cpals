@@ -21,7 +21,7 @@
 (defn decode
   "Decode a hex string to a sequence of bytes"
   [hex]
-  (byte-array (->> hex
-                   (map hex-to-int)
-                   (partition-all 2)
-                   (map #(apply hex-combine %)))))
+  (->> hex
+       (map hex-to-int)
+       (partition-all 2)
+       (map #(apply hex-combine %))))

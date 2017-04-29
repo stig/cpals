@@ -63,5 +63,4 @@
   (->> encoded
        (partition 4)
        (map b64-decode-quad)
-       flatten
-       byte-array))
+       flatten))

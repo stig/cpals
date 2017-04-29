@@ -8,7 +8,7 @@
 
 (t/deftest encode-test
   (t/testing "simple cases"
-    (t/are [x y] (= x (encode (byte-array y)))
+    (t/are [x y] (= x (encode y))
       "AA==" [0]
       "AAA=" [0 0]
       "AAAA" [0 0 0]))

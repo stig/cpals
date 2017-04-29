@@ -1,16 +1,14 @@
 (ns cpals.core)
 
 (defn xor-bytes
-  "XOR two equal-length buffers, returning the resulting byte-array"
+  "XOR two equal-length buffers, returning the result"
   [xs ys]
-  (byte-array
-   (map bit-xor xs ys)))
+  (map bit-xor xs ys))
 
 (defn xor-bytes-c
-  "Return a new byte-array with each byte in `bytes` xor'd against `c`"
+  "XOR `bytes` against `c`"
   [bytes c]
-  (byte-array
-   (map #(bit-xor c %) bytes)))
+  (map #(bit-xor c %) bytes))
 
 (def ^:private char-freqs
   "Taken from: https://en.wikipedia.org/wiki/Letter_frequency"

@@ -13,12 +13,11 @@
       [255] "ff"
       [254 1 15] "fe010f"))
   (t/testing "byte arrays"
-    (t/is (= "fe010f" (encode (byte-array [254 1 15]))))))
+    (t/is (= "fe010f" (encode [254 1 15])))))
 
 (t/deftest decode-test
   (t/are [in out]
-      (java.util.Arrays/equals (byte-array out)
-                               (decode in))
+      (= out (decode in))
     "00" [0]
     "FF" [255]
     "FE010F" [254 1 15]
