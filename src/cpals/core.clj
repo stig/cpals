@@ -50,8 +50,8 @@
      (zipmap (map byte lowers) scores)
      (zipmap (map byte uppers) scores))))
 
-(defn score-bytes
-  "Score a sequence of bytes based on character frequencyin it"
+(defn score-buffer-english
+  "Score a buffer of bytes based on its likelyhood of being English text"
   [text]
   (->> text
        (map byte-freqs)
@@ -61,7 +61,7 @@
   "Decode a singe-char xor cipher text"
   [bytes]
   (let [bytevals (range Byte/MIN_VALUE Byte/MAX_VALUE)
-        scores (map #(score-bytes (xor-buffer-with-byte bytes %)) bytevals)
+        scores (map #(score-buffer-english (xor-buffer-with-byte bytes %)) bytevals)
         guess (->> (zipmap bytevals scores)
                    (sort-by second)
                    last)]
