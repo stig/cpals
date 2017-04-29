@@ -1,11 +1,11 @@
 (ns cpals.core)
 
-(defn xor-bytes
+(defn xor-buffers
   "XOR two equal-length buffers, returning the result"
   [xs ys]
   (map bit-xor xs ys))
 
-(defn xor-bytes-c
+(defn xor-buffer-with-byte
   "XOR `bytes` against `c`"
   [bytes c]
   (map #(bit-xor c %) bytes))
@@ -61,13 +61,13 @@
   "Decode a singe-char xor cipher text"
   [bytes]
   (let [bytevals (range Byte/MIN_VALUE Byte/MAX_VALUE)
-        scores (map #(score-bytes (xor-bytes-c bytes %)) bytevals)
+        scores (map #(score-bytes (xor-buffer-with-byte bytes %)) bytevals)
         guess (->> (zipmap bytevals scores)
                    (sort-by second)
                    last)]
     {:key (char (first guess))
      :score (second guess)
-     :text (->> (xor-bytes-c bytes (first guess))
+     :text (->> (xor-buffer-with-byte bytes (first guess))
                 (map #(bit-and 0xff %))
                 (map char)
                 (apply str))}))

@@ -19,7 +19,7 @@
     (let [a (hex/decode "1c0111001f010100061a024b53535009181c")
           b (hex/decode "686974207468652062756c6c277320657965")
           expected "746865206b696420646f6e277420706c6179"]
-      (t/is (= expected (hex/encode (xor-bytes a b)))))))
+      (t/is (= expected (hex/encode (xor-buffers a b)))))))
 
 (t/deftest challenge3
   "http://cryptopals.com/sets/1/challenges/3"
