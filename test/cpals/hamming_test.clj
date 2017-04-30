@@ -24,4 +24,6 @@
 (t/deftest hamming-distance-test
   (t/are [x y distance]
       (= (hamming-distance (utf8 x) (utf8 y)))
-    "this is a test" "wokka wokka!!!" 37))
+    "this is a test" "wokka wokka!!!" 37
+    "this is a test" "THIS IS A TEST" 10
+    ))

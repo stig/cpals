@@ -49,8 +49,12 @@
 
 (defn- score-keysize
   [bytes n]
-  (let [[x y & xs] (partition n n (repeat 0) bytes)]
-    (/ (hamming-distance x y) n)))
+  ;; Hamming distance is only defined for strings of equal length, so
+  ;; return nil if keysize is too long to leave 4 equal parts
+  (when (< (* 4 n) (count bytes))
+    (let [[a b c d & xs] (partition n bytes)]
+      (/ (+ (hamming-distance a b)
+            (hamming-distance c d)) n 2))))
 
 (defn rank-keysizes
   "Rank likely keysizes by calculating hamming distance between substrings"
@@ -58,4 +62,5 @@
   ([bytes minsize maxsize]
    (->> (range minsize maxsize)
         (map (fn [x] [x (score-keysize bytes x)]))
-        (sort-by last #(- %2 %1)))))
+        (remove (fn [[_ x]] (nil? x)))
+        (sort-by last))))
