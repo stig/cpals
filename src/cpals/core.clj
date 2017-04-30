@@ -36,7 +36,6 @@
   (let [lowers (map first char-freqs)
         uppers (seq (.toUpperCase (apply str lowers)))
         scores (map second char-freqs)]
-    (println lowers uppers scores)
     (merge
      (zipmap (map byte lowers) scores)
      (zipmap (map byte uppers) scores))))
