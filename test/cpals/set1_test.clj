@@ -2,7 +2,8 @@
   (:require [clojure.test :as t]
             [cpals
              [core :refer :all]
-             [util :refer [read-file read-lines utf8]]]
+             [util :refer [read-file read-lines utf8]]
+             [xor :refer :all]]
             [cpals.coding
              [b64 :as b64]
              [hex :as hex]]))

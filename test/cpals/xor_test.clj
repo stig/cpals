@@ -1,7 +1,6 @@
-(ns cpals.core-test
-  (:require [clojure.test :refer :all]
-            [cpals.core :refer :all]
-            [clojure.test :as t]))
+(ns cpals.xor-test
+  (:require [clojure.test :as t :refer :all]
+            [cpals.xor :refer :all]))
 
 (t/deftest xor-buffers-test
   (t/are [a b c]
