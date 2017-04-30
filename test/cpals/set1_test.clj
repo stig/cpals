@@ -1,7 +1,7 @@
 (ns cpals.set1-test
   (:require [clojure.test :as t]
             [cpals
-             [core :refer :all]
+             [aes :as aes]
              [util :refer [read-file read-lines utf8]]
              [xor :refer :all]]
             [cpals.coding
@@ -59,3 +59,12 @@
                   (read-file "6.txt")))]
       (t/is (= (:key guess) "Terminator X: Bring the noise"))
       (t/is (.startsWith (:text guess) "I'm back and I'm ringin' the bell")))))
+
+
+(t/deftest challenge7
+  "http://cryptopals.com/sets/1/challenges/7"
+  (let [secret "YELLOW SUBMARINE"
+        encrypted (byte-array (b64/decode (read-file "7.txt")))
+        decrypted (aes/decrypt encrypted secret)
+        first-line "I'm back and I'm ringin' the bell"]
+    (t/is (.startsWith (String. decrypted) first-line))))
