@@ -64,3 +64,8 @@
         (map (fn [x] [x (score-keysize bytes x)]))
         (remove (fn [[_ x]] (nil? x)))
         (sort-by last))))
+
+(defn transpose
+  "Transpose a 'matrix'"
+  [matrix]
+  (apply map vector matrix))
