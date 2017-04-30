@@ -1,10 +1,11 @@
 (ns cpals.set1-test
   (:require [clojure.test :as t]
+            [cpals
+             [core :refer :all]
+             [util :refer [read-lines utf8]]]
             [cpals.coding
              [b64 :as b64]
-             [hex :as hex]]
-            [cpals.core :refer :all]
-            [clojure.java.io :as io]))
+             [hex :as hex]]))
 
 (t/deftest challenge1
   "http://cryptopals.com/sets/1/challenges/1"
@@ -32,11 +33,6 @@
          :score 228.07300000000004
          :text "Cooking MC's like a pound of bacon"}))))
 
-(defn- read-lines
-  [filename]
-  (with-open [rdr (io/reader (io/resource filename))]
-    (doall (line-seq rdr))))
-
 (t/deftest challenge4
   "http://cryptopals.com/sets/1/challenges/4"
   (t/testing "detecting single-char xor cipher text"
@@ -53,5 +49,5 @@
     (let [cleartext "Burning 'em, if you ain't quick and nimble\nI go crazy when I hear a cymbal"
           key "ICE"
           ciphertext "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"]
-      (t/is (= (hex/encode (xor-buffer-with-key (map byte cleartext) key))
+      (t/is (= (hex/encode (xor-buffer-with-key (utf8 cleartext) key))
                ciphertext)))))
