@@ -86,3 +86,8 @@
        (map decode-single-char-xor-cipher)
        (sort-by :score)
        last))
+
+(defn decode-repeating-key-xor-cipher
+  "Decode a repeating key xor ciper"
+  [bytes]
+  {})

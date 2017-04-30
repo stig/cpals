@@ -2,7 +2,7 @@
   (:require [clojure.test :as t]
             [cpals
              [core :refer :all]
-             [util :refer [read-lines utf8]]]
+             [util :refer [read-file read-lines utf8]]]
             [cpals.coding
              [b64 :as b64]
              [hex :as hex]]))
@@ -51,3 +51,13 @@
           ciphertext "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"]
       (t/is (= (hex/encode (xor-buffer-with-key (utf8 cleartext) key))
                ciphertext)))))
+
+(t/deftest challenge6
+  "http://cryptopals.com/sets/1/challenges/6"
+  (t/testing "break repeating-key XOR cipher"
+    (t/is (= {:key "wokka wokka!!"
+              :text "willy wonka was here"
+              :score 234.555}
+             (decode-repeating-key-xor-cipher
+              (b64/decode
+               (read-file "6.txt")))))))

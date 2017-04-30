@@ -11,3 +11,8 @@
   [filename]
   (with-open [rdr (io/reader (io/resource filename))]
     (doall (line-seq rdr))))
+
+(defn read-file
+  "Read in a file from `resoures/` folder and return its content as a string"
+  [filename]
+  (apply str (read-lines filename)))
