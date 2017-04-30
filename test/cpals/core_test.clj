@@ -7,14 +7,14 @@
 
 (t/deftest rank-keysizes-test
   (t/testing "actual keysize should be in first 5 guesses"
-    (let [bytes (utf8 "This challenge isn't conceptually hard, but it involves actual error-prone coding. The other challenges in this set are there to bring you up to speed. This one is there to qualify you. If you can do this one, you're probably just fine up to Set 6. ")]
+    (let [bytes (utf8 "This challenge isn't conceptually hard, but it involves actual error-prone coding.")]
       (t/are [x]
           (let [ciphertext (xor-buffer-with-key bytes x)
-                keysizes (take 3 (map first (rank-keysizes ciphertext)))]
+                keysizes (take 5 (map first (rank-keysizes ciphertext)))]
             (some #{(count x)} keysizes))
         "ICE"
-        "CIE"
-        "ECI"))))
+        "abcdefGHIJ"
+        "Abcdefg"))))
 
 (t/deftest transpose-test
   (t/testing "transposing a matrix"
