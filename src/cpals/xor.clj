@@ -1,4 +1,5 @@
-(ns cpals.xor)
+(ns cpals.xor
+  (:require [cpals.core :refer [score-buffer-english]]))
 
 (defn xor-buffers
   "XOR two equal-length buffers, returning the result"
