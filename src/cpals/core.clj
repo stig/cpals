@@ -47,7 +47,7 @@
        (map byte-freqs)
        (reduce (fnil + 0 0))))
 
-(defn- score-keysize
+(defn score-keysize
   [bytes n]
   ;; Hamming distance is only defined for strings of equal length.
   ;; Return nil if keysize is undefined.
