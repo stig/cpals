@@ -60,9 +60,9 @@
 
 (defn rank-keysizes
   "Rank likely keysizes by calculating hamming distance between substrings"
-  ([bytes] (rank-keysizes bytes 2 40))
-  ([bytes minsize maxsize]
-   (->> (range minsize maxsize)
+  ([bytes] (rank-keysizes bytes (range 2 40)))
+  ([bytes keysizes]
+   (->> keysizes
         (map (fn [x] [x (score-keysize bytes x)]))
         (remove (fn [[_ x]] (nil? x)))
         (sort-by last))))
