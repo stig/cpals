@@ -1,9 +1,8 @@
 (ns cpals.core-test
   (:require [clojure.test :as t]
-            [cpals
-             [core :refer [rank-keysizes transpose]]
-             [util :refer [utf8]]
-             [xor :refer [xor-buffer-with-key]]]))
+            [cpals.core :refer [rank-keysizes transpose]]
+            [cpals.util :refer [utf8]]
+            [cpals.xor :refer [xor-buffer-with-key]]))
 
 (t/deftest rank-keysizes-test
   (t/testing "actual keysize should be in first 5 guesses"

@@ -1,8 +1,7 @@
 (ns cpals.hamming-test
   (:require [clojure.test :as t]
-            [cpals
-             [hamming :refer [count-set-bits hamming-distance]]
-             [util :refer [utf8]]]))
+            [cpals.hamming :refer [count-set-bits hamming-distance]]
+            [cpals.util :refer [utf8]]))
 
 (t/deftest count-set-bits-test
   (t/are [bits cnt]

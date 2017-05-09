@@ -1,12 +1,11 @@
 (ns cpals.set1-test
   (:require [clojure.test :as t]
-            [cpals
-             [aes :as aes]
-             [util :refer [read-file read-lines utf8]]
-             [xor :refer :all]]
-            [cpals.coding
-             [b64 :as b64]
-             [hex :as hex]]))
+            [cpals.aes :as aes]
+            [cpals.coding.b64 :as b64]
+            [cpals.coding.hex :as hex]
+            [cpals.core :refer [detect-aes-ecb-encrypted-cipher]]
+            [cpals.util :refer [read-file read-lines utf8]]
+            [cpals.xor :refer :all]))
 
 (t/deftest challenge1
   "http://cryptopals.com/sets/1/challenges/1"
@@ -68,3 +67,8 @@
         decrypted (aes/decrypt encrypted secret)
         first-line "I'm back and I'm ringin' the bell"]
     (t/is (.startsWith (String. decrypted) first-line))))
+
+(t/deftest challenge8
+  "http://cryptopals.com/sets/1/challenges/8"
+  (t/is (= 132 (detect-aes-ecb-encrypted-cipher (->> (read-lines "8.txt")
+                                                     (map hex/decode))))))
