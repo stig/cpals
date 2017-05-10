@@ -1,7 +1,8 @@
 (ns cpals.hamming-test
   (:require [clojure.test :as t]
-            [cpals.hamming :refer [hamming-distance]]
-            [cpals.util :refer [utf8]]))
+            [cpals.hamming :refer [hamming-distance rank-keysizes]]
+            [cpals.util :refer [utf8]]
+            [cpals.xor :refer [xor-buffer-with-key]]))
 
 (t/deftest hamming-distance-test
   (t/testing "single-byte byte sequences"
@@ -26,3 +27,14 @@
       "this is a test" "wokka wokka!!!" 37
       "this is a test" "THIS IS A TEST" 11
       )))
+
+(t/deftest rank-keysizes-test
+  (t/testing "actual keysize should be in first 5 guesses"
+    (let [bytes (utf8 "This challenge isn't conceptually hard, but it involves actual error-prone coding.")]
+      (t/are [x]
+          (let [ciphertext (xor-buffer-with-key bytes x)
+                keysizes (take 5 (map first (rank-keysizes ciphertext)))]
+            (some #{(count x)} keysizes))
+        "ICE"
+        "abcdefGHIJ"
+        "Abcdefg"))))

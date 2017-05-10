@@ -1,5 +1,6 @@
 (ns cpals.xor
-  (:require [cpals.core :refer [rank-keysizes score-buffer-english transpose]]))
+  (:require [cpals.core :refer [score-buffer-english transpose]]
+            [cpals.hamming :refer [rank-keysizes]]))
 
 (defn xor-buffers
   "XOR two equal-length buffers, returning the result"

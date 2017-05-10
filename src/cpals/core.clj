@@ -1,5 +1,4 @@
-(ns cpals.core
-  (:require [cpals.hamming :refer [hamming-distance]]))
+(ns cpals.core)
 
 (def ^:private char-freqs
   "Taken from: https://en.wikipedia.org/wiki/Letter_frequency"
@@ -46,26 +45,6 @@
   (->> text
        (map byte-freqs)
        (reduce (fnil + 0 0))))
-
-(defn score-keysize
-  [bytes n]
-  ;; Hamming distance is only defined for strings of equal length.
-  ;; Return nil if keysize is undefined.
-  (when-let [hams (seq (->> (partition n bytes)
-                            (partition 2)
-                            (map #(apply hamming-distance %))))]
-    (/ (reduce + hams)
-       (count hams)
-       n)))
-
-(defn rank-keysizes
-  "Rank likely keysizes by calculating hamming distance between substrings"
-  ([bytes] (rank-keysizes bytes (range 2 40)))
-  ([bytes keysizes]
-   (->> keysizes
-        (map (fn [x] [x (score-keysize bytes x)]))
-        (remove (fn [[_ x]] (nil? x)))
-        (sort-by last))))
 
 (defn transpose
   "Transpose a 'matrix'"
