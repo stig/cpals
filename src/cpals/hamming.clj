@@ -1,6 +1,6 @@
 (ns cpals.hamming)
 
-(defn count-set-bits
+(defn- count-set-bits
   "Count set bits"
   [thing]
   (loop [bits thing
