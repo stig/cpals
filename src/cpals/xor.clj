@@ -1,5 +1,6 @@
 (ns cpals.xor
-  (:require [cpals.core :refer [score-buffer-english transpose]]
+  (:require [cpals.core :refer [transpose]]
+            [cpals.english :refer [score-buffer]]
             [cpals.hamming :refer [rank-keysizes]]))
 
 (defn xor-buffers
@@ -30,7 +31,7 @@
   "Decode a singe-char xor cipher text"
   [bytes]
   (let [bytevals (range Byte/MIN_VALUE Byte/MAX_VALUE)
-        scores (map #(score-buffer-english (xor-buffer-with-byte bytes %)) bytevals)
+        scores (map #(score-buffer (xor-buffer-with-byte bytes %)) bytevals)
         guess (->> (zipmap bytevals scores)
                    (sort-by second)
                    last)]
@@ -59,7 +60,7 @@
 (defn- score-repeating-xor-key
   [bytes key]
   [key (->> (xor-buffer-with-key bytes key)
-            score-buffer-english)])
+            score-buffer)])
 
 (defn break-repeating-key-xor-cipher
   "Decode a repeating key xor cipher"
