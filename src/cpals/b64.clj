@@ -1,4 +1,4 @@
-(ns cpals.coding.b64)
+(ns cpals.b64)
 
 
 (def ^:private alphabet

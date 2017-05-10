@@ -1,10 +1,9 @@
-(ns cpals.coding.b64-test
+(ns cpals.b64-test
   (:require [clojure.test :as t]
-            [clojure.test.check
-             [clojure-test :refer [defspec]]
-             [generators :as gen]
-             [properties :as prop]]
-            [cpals.coding.b64 :refer [decode encode]]))
+            [clojure.test.check.clojure-test :refer [defspec]]
+            [clojure.test.check.generators :as gen]
+            [clojure.test.check.properties :as prop]
+            [cpals.b64 :refer [decode encode]]))
 
 (t/deftest encode-test
   (t/testing "simple cases"

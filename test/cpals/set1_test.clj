@@ -1,7 +1,7 @@
 (ns cpals.set1-test
   (:require [clojure.test :as t]
             [cpals.aes :as aes]
-            [cpals.coding.b64 :as b64]
+            [cpals.b64 :as b64]
             [cpals.coding.hex :as hex]
             [cpals.core :refer [detect-aes-ecb-encrypted-cipher]]
             [cpals.util :refer [read-file read-lines utf8]]
