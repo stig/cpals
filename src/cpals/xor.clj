@@ -36,7 +36,8 @@
                 (apply str))}))
 
 (defn detect-single-byte-xor-cipher
-  "Given list of cipher texts, detect the one most likely to be encoded by single-char xor cipher"
+  "Given list of cipher texts, detect the one most likely to be
+  encoded by single-char xor cipher"
   [byte-arrays]
   (->> byte-arrays
        (map break-single-byte-xor-cipher)
