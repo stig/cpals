@@ -1,4 +1,4 @@
-(ns cpals.coding.hex)
+(ns cpals.hex)
 
 (defn encode
   "Encode a sequence of bytes to a hex string"

@@ -1,10 +1,9 @@
-(ns cpals.coding.hex-test
+(ns cpals.hex-test
   (:require [clojure.test :as t]
-            [clojure.test.check
-             [clojure-test :refer [defspec]]
-             [generators :as gen]
-             [properties :as prop]]
-            [cpals.coding.hex :refer :all]))
+            [clojure.test.check.clojure-test :refer [defspec]]
+            [clojure.test.check.generators :as gen]
+            [clojure.test.check.properties :as prop]
+            [cpals.hex :refer :all]))
 
 (t/deftest encode-test
   (t/testing "vectors"
