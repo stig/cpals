@@ -32,8 +32,8 @@
      :score (second guess)
      :text (->> (xor-buffer-with-byte bytes (first guess))
                 (map #(bit-and 0xff %))
-                (map char)
-                (apply str))}))
+                byte-array
+                String.)}))
 
 (defn detect-single-byte-xor-cipher
   "Given list of cipher texts, detect the one most likely to be
@@ -73,7 +73,7 @@
                  (sort-by count) ;; sort keys by length
                  first)] ;; grab shortest key
 
-    {:key (apply str (map char key))
+    {:key (String. (byte-array key))
      :text (->> (xor-buffer-with-key bytes key)
-                (map char)
-                (apply str))}))
+                byte-array
+                String.)}))
