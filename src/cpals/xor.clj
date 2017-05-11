@@ -31,7 +31,6 @@
     {:key (first guess)
      :score (second guess)
      :text (->> (xor-buffer-with-byte bytes (first guess))
-                (map #(bit-and 0xff %))
                 byte-array
                 String.)}))
 
