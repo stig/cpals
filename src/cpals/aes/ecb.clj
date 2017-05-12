@@ -1,4 +1,4 @@
-(ns cpals.aes
+(ns cpals.aes.ecb
   (:require [cpals.util :refer [utf8]])
   (:import javax.crypto.Cipher
            javax.crypto.spec.SecretKeySpec))

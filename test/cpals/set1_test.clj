@@ -1,6 +1,6 @@
 (ns cpals.set1-test
   (:require [clojure.test :as t]
-            [cpals.aes :as aes]
+            [cpals.aes.ecb :as ecb]
             [cpals.b64 :as b64]
             [cpals.hex :as hex]
             [cpals.util :refer [read-file read-lines utf8]]
@@ -63,11 +63,11 @@
   "http://cryptopals.com/sets/1/challenges/7"
   (let [secret "YELLOW SUBMARINE"
         encrypted (byte-array (b64/decode (read-file "7.txt")))
-        decrypted (aes/decrypt encrypted secret)
+        decrypted (ecb/decrypt encrypted secret)
         first-line "I'm back and I'm ringin' the bell"]
     (t/is (.startsWith (String. decrypted) first-line))))
 
 (t/deftest challenge8
   "http://cryptopals.com/sets/1/challenges/8"
-  (t/is (= 132 (aes/detect-ecb-encrypted-cipher (->> (read-lines "8.txt")
+  (t/is (= 132 (ecb/detect-ecb-encrypted-cipher (->> (read-lines "8.txt")
                                                      (map hex/decode))))))

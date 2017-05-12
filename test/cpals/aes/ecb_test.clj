@@ -1,6 +1,6 @@
-(ns cpals.aes-test
-  (:require [cpals.aes :refer :all]
-            [clojure.test :as t]))
+(ns cpals.aes.ecb-test
+  (:require [clojure.test :as t]
+            [cpals.aes.ecb :refer :all]))
 
 (t/deftest encrypt-decrypt-test
   (let [key "YELLOW SUBMARINE"
