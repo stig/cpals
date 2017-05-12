@@ -20,7 +20,7 @@
   [bytes c]
   (map #(bit-xor c %) bytes))
 
-(defn break-single-byte-xor-cipher
+(defn break-single-byte-key-cipher
   "Decode a singe-char xor cipher text"
   [bytes]
   (let [bytevals (range Byte/MIN_VALUE Byte/MAX_VALUE)
@@ -34,35 +34,35 @@
                 byte-array
                 String.)}))
 
-(defn detect-single-byte-xor-cipher
+(defn detect-single-byte-key-cipher
   "Given list of cipher texts, detect the one most likely to be
   encoded by single-char xor cipher"
   [byte-arrays]
   (->> byte-arrays
-       (map break-single-byte-xor-cipher)
+       (map break-single-byte-key-cipher)
        (sort-by :score)
        last))
 
-(defn- guess-repeating-xor-key
+(defn- guess-repeating-key
   [bytes keylen]
   (->> (partition keylen bytes)
        transpose
-       (map break-single-byte-xor-cipher)
+       (map break-single-byte-key-cipher)
        (map :key)))
 
-(defn- score-repeating-xor-key
+(defn- score-repeating-key
   [bytes key]
   [key (->> (xor-buffer-with-key bytes key)
             score-buffer)])
 
-(defn break-repeating-key-xor-cipher
+(defn break-repeating-key-cipher
   "Decode a repeating key xor cipher"
   [bytes]
   (let [key (->> (rank-keysizes bytes)
                  (map first)
                  (take 3)
-                 (map #(guess-repeating-xor-key bytes %))
-                 (map #(score-repeating-xor-key bytes %))
+                 (map #(guess-repeating-key bytes %))
+                 (map #(score-repeating-key bytes %))
                  (group-by last)
                  (sort-by first)
                  last ;; get highest scoring group

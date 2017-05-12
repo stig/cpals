@@ -27,7 +27,7 @@
     (t/is
      (= "Cooking MC's like a pound of bacon"
         (:text
-         (break-single-byte-xor-cipher
+         (break-single-byte-key-cipher
           (hex/decode
            "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736")))))))
 
@@ -38,7 +38,7 @@
              (:text
               (->> (read-lines "4.txt")
                    (map hex/decode)
-                   detect-single-byte-xor-cipher))))))
+                   detect-single-byte-key-cipher))))))
 
 (t/deftest challenge5
   "http://cryptopals.com/sets/1/challenges/5"
@@ -52,7 +52,7 @@
 (t/deftest challenge6
   "http://cryptopals.com/sets/1/challenges/6"
   (t/testing "break repeating-key XOR cipher"
-    (let [guess (break-repeating-key-xor-cipher
+    (let [guess (break-repeating-key-cipher
                  (b64/decode
                   (read-file "6.txt")))]
       (t/is (= (:key guess) "Terminator X: Bring the noise"))
