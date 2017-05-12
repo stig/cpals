@@ -2,7 +2,6 @@
   (:require [clojure.test :as t]
             [cpals.aes :as aes]
             [cpals.b64 :as b64]
-            [cpals.core :refer [detect-aes-ecb-encrypted-cipher]]
             [cpals.hex :as hex]
             [cpals.util :refer [read-file read-lines utf8]]
             [cpals.xor :refer :all]))
@@ -70,5 +69,5 @@
 
 (t/deftest challenge8
   "http://cryptopals.com/sets/1/challenges/8"
-  (t/is (= 132 (detect-aes-ecb-encrypted-cipher (->> (read-lines "8.txt")
+  (t/is (= 132 (aes/detect-ecb-encrypted-cipher (->> (read-lines "8.txt")
                                                      (map hex/decode))))))

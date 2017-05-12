@@ -22,3 +22,14 @@
   (-> (doto aes-cipher
         (.init Cipher/DECRYPT_MODE (secret-key rawkey)))
       (.doFinal ciphertext)))
+
+(defn detect-ecb-encrypted-cipher
+  "Find a needle in a haystack. (But don't break it.)"
+  [byte-seqs]
+  (->> byte-seqs
+       (map #(partition 16 %))
+       (map #(into #{} %))
+       (map count)
+       (map-indexed vector)
+       (apply min-key second)
+       first))
