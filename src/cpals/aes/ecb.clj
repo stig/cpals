@@ -5,8 +5,8 @@
 
 (def ^:private AES "AES")
 
-(defn- secret-key [raw-key]
-  (SecretKeySpec. (utf8 raw-key) AES))
+(defn- secret-key-spec [raw-key]
+  (SecretKeySpec. raw-key AES))
 
 (def ^:private aes-cipher (Cipher/getInstance AES))
 
@@ -14,13 +14,13 @@
   "Encrypt plaintext using rawkey as the key. rawkey has to be a multiple of
   16 characters. A byte-array is returned."
   (-> (doto aes-cipher
-        (.init Cipher/ENCRYPT_MODE (secret-key rawkey)))
-      (.doFinal (utf8 plaintext))))
+        (.init Cipher/ENCRYPT_MODE (secret-key-spec rawkey)))
+      (.doFinal plaintext)))
 
 (defn decrypt [ciphertext rawkey]
   "Decrypt ciphertext using the rawkey. A byte-array is returned."
   (-> (doto aes-cipher
-        (.init Cipher/DECRYPT_MODE (secret-key rawkey)))
+        (.init Cipher/DECRYPT_MODE (secret-key-spec rawkey)))
       (.doFinal ciphertext)))
 
 (defn detect-ecb-encrypted-cipher

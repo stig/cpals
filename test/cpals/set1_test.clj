@@ -63,7 +63,7 @@
   "http://cryptopals.com/sets/1/challenges/7"
   (let [secret "YELLOW SUBMARINE"
         encrypted (byte-array (b64/decode (read-file "7.txt")))
-        decrypted (ecb/decrypt encrypted secret)
+        decrypted (ecb/decrypt encrypted (utf8 secret))
         first-line "I'm back and I'm ringin' the bell"]
     (t/is (.startsWith (String. decrypted) first-line))))
 
