@@ -5,7 +5,7 @@
 
 (t/deftest encrypt-decrypt-test
   (let [key "YELLOW SUBMARINE"
-        msg "Hello World"]
+        msg "0123456789abcdef"]
     (t/is (= msg (String.
                   (decrypt
                    (encrypt (utf8 msg) (utf8 key))

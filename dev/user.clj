@@ -6,10 +6,10 @@
             [clojure.test :as test]
             [clojure.tools.namespace.repl :refer [refresh]]
             [cpals.aes.ecb :as ecb]
+            [cpals.aes.cbc :as cbc]
             [cpals.b64 :as b64]
             [cpals.core :refer :all]
             [cpals.hex :as hex]
             [cpals.padding :refer :all]
-            [cpals.util :as util]
+            [cpals.util :refer :all]
             [cpals.xor :as xor]))
-

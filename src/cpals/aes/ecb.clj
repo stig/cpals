@@ -1,12 +1,12 @@
 (ns cpals.aes.ecb
-  (:require [cpals.util :refer [utf8]])
   (:import javax.crypto.Cipher
            javax.crypto.spec.SecretKeySpec))
 
-(def ^:private AES "AES")
+(def ^:private AES
+  "AES/ECB/NOPADDING")
 
 (defn- secret-key-spec [raw-key]
-  (SecretKeySpec. raw-key AES))
+  (SecretKeySpec. raw-key "AES"))
 
 (def ^:private aes-cipher (Cipher/getInstance AES))
 
